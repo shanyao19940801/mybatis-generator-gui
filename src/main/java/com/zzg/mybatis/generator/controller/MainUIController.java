@@ -132,13 +132,13 @@ public class MainUIController extends BaseFXController {
             controller.setMainUIController(this);
             controller.showDialogStage();
         });
-		useExample.setOnMouseClicked(event -> {
+		/*useExample.setOnMouseClicked(event -> {
 			if (useExample.isSelected()) {
 				offsetLimitCheckBox.setDisable(false);
 			} else {
 				offsetLimitCheckBox.setDisable(true);
 			}
-		});
+		});*/
 
         leftDBTree.setShowRoot(false);
         leftDBTree.setRoot(new TreeItem<>());
@@ -224,12 +224,12 @@ public class MainUIController extends BaseFXController {
 	private void setTooltip() {
 		encodingChoice.setTooltip(new Tooltip("生成文件的编码，必选"));
 		generateKeysField.setTooltip(new Tooltip("insert时可以返回主键ID"));
-		offsetLimitCheckBox.setTooltip(new Tooltip("是否要生成分页查询代码"));
+//		offsetLimitCheckBox.setTooltip(new Tooltip("是否要生成分页查询代码"));
 		commentCheckBox.setTooltip(new Tooltip("使用数据库的列注释作为实体类字段名的Java注释 "));
-		useActualColumnNamesCheckbox.setTooltip(new Tooltip("是否使用数据库实际的列名作为实体类域的名称"));
-		useTableNameAliasCheckbox.setTooltip(new Tooltip("在Mapper XML文件中表名使用别名，并且列全部使用as查询"));
+//		useActualColumnNamesCheckbox.setTooltip(new Tooltip("是否使用数据库实际的列名作为实体类域的名称"));
+//		useTableNameAliasCheckbox.setTooltip(new Tooltip("在Mapper XML文件中表名使用别名，并且列全部使用as查询"));
 		overrideXML.setTooltip(new Tooltip("重新生成时把原XML文件覆盖，否则是追加"));
-        useDAOExtendStyle.setTooltip(new Tooltip("将通用接口方法放在公共接口中，DAO接口留空"));
+//        useDAOExtendStyle.setTooltip(new Tooltip("将通用接口方法放在公共接口中，DAO接口留空"));
         forUpdateCheckBox.setTooltip(new Tooltip("在Select语句中增加for update后缀"));
 	}
 
@@ -265,6 +265,14 @@ public class MainUIController extends BaseFXController {
 
     @FXML
     public void generateCode() {
+        //TODO sy
+        //1. javaType
+        //2.mapper.java的生成位置
+        //3.自动生成方法，只保留select和insert
+        //4.insert中 is_deleted, create_time 使用写死的值
+        //5.insertzi东生成主键id
+        //6.mapper.xml 删除sql选项
+        //7.实体注释可选择
         if (tableName == null) {
             AlertUtil.showWarnAlert("请先在左侧选择数据库表");
             return;
@@ -368,6 +376,7 @@ public class MainUIController extends BaseFXController {
         }
     }
 
+    //从UI读取参数
     public GeneratorConfig getGeneratorConfigFromUI() {
         GeneratorConfig generatorConfig = new GeneratorConfig();
         generatorConfig.setProjectFolder(projectFolderField.getText());
@@ -381,20 +390,20 @@ public class MainUIController extends BaseFXController {
         generatorConfig.setMappingXMLTargetFolder(mappingTargetProject.getText());
         generatorConfig.setTableName(tableNameField.getText());
         generatorConfig.setDomainObjectName(domainObjectNameField.getText());
-        generatorConfig.setOffsetLimit(offsetLimitCheckBox.isSelected());
+//        generatorConfig.setOffsetLimit(offsetLimitCheckBox.isSelected());
         generatorConfig.setComment(commentCheckBox.isSelected());
         generatorConfig.setOverrideXML(overrideXML.isSelected());
-        generatorConfig.setNeedToStringHashcodeEquals(needToStringHashcodeEquals.isSelected());
-        generatorConfig.setUseTableNameAlias(useTableNameAliasCheckbox.isSelected());
+//        generatorConfig.setNeedToStringHashcodeEquals(needToStringHashcodeEquals.isSelected());
+//        generatorConfig.setUseTableNameAlias(useTableNameAliasCheckbox.isSelected());
         generatorConfig.setNeedForUpdate(forUpdateCheckBox.isSelected());
         generatorConfig.setAnnotationDAO(annotationDAOCheckBox.isSelected());
-        generatorConfig.setAnnotation(annotationCheckBox.isSelected());
-        generatorConfig.setUseActualColumnNames(useActualColumnNamesCheckbox.isSelected());
+//        generatorConfig.setAnnotation(annotationCheckBox.isSelected());
+//        generatorConfig.setUseActualColumnNames(useActualColumnNamesCheckbox.isSelected());
         generatorConfig.setEncoding(encodingChoice.getValue());
-        generatorConfig.setUseExample(useExample.isSelected());
-        generatorConfig.setUseDAOExtendStyle(useDAOExtendStyle.isSelected());
-        generatorConfig.setUseSchemaPrefix(useSchemaPrefix.isSelected());
-        generatorConfig.setJsr310Support(jsr310Support.isSelected());
+//        generatorConfig.setUseExample(useExample.isSelected());
+//        generatorConfig.setUseDAOExtendStyle(useDAOExtendStyle.isSelected());
+//        generatorConfig.setUseSchemaPrefix(useSchemaPrefix.isSelected());
+//        generatorConfig.setJsr310Support(jsr310Support.isSelected());
         return generatorConfig;
     }
 

@@ -85,7 +85,7 @@ public class MybatisGeneratorBridge {
 		} else {
             tableConfig.setCatalog(selectedDatabaseConfig.getSchema());
 	    }
-        if (generatorConfig.isUseSchemaPrefix()) {
+        /*if (generatorConfig.isUseSchemaPrefix()) {
             if (DbType.MySQL.name().equals(dbType) || DbType.MySQL_8.name().equals(dbType)) {
                 tableConfig.setSchema(selectedDatabaseConfig.getSchema());
             } else if (DbType.Oracle.name().equals(dbType)) {
@@ -94,7 +94,7 @@ public class MybatisGeneratorBridge {
             } else {
                 tableConfig.setCatalog(selectedDatabaseConfig.getSchema());
             }
-        }
+        }*/
         // 针对 postgresql 单独配置
 		if (DbType.PostgreSQL.name().equals(dbType)) {
             tableConfig.setDelimitIdentifiers(true);
@@ -189,7 +189,7 @@ public class MybatisGeneratorBridge {
         serializablePluginConfiguration.setConfigurationType("org.mybatis.generator.plugins.SerializablePlugin");
         context.addPluginConfiguration(serializablePluginConfiguration);
         // toString, hashCode, equals插件
-        if (generatorConfig.isNeedToStringHashcodeEquals()) {
+        /*if (generatorConfig.isNeedToStringHashcodeEquals()) {
             PluginConfiguration pluginConfiguration1 = new PluginConfiguration();
             pluginConfiguration1.addProperty("type", "org.mybatis.generator.plugins.EqualsHashCodePlugin");
             pluginConfiguration1.setConfigurationType("org.mybatis.generator.plugins.EqualsHashCodePlugin");
@@ -198,7 +198,7 @@ public class MybatisGeneratorBridge {
             pluginConfiguration2.addProperty("type", "org.mybatis.generator.plugins.ToStringPlugin");
             pluginConfiguration2.setConfigurationType("org.mybatis.generator.plugins.ToStringPlugin");
             context.addPluginConfiguration(pluginConfiguration2);
-        }
+        }*/
         // limit/offset插件
         if (generatorConfig.isOffsetLimit()) {
             if (DbType.MySQL.name().equals(dbType) || DbType.MySQL_8.name().equals(dbType)
@@ -209,12 +209,12 @@ public class MybatisGeneratorBridge {
                 context.addPluginConfiguration(pluginConfiguration);
             }
         }
-        //for JSR310
+        /*//for JSR310
         if (generatorConfig.isJsr310Support()) {
             JavaTypeResolverConfiguration javaTypeResolverConfiguration = new JavaTypeResolverConfiguration();
             javaTypeResolverConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.JavaTypeResolverJsr310Impl");
             context.setJavaTypeResolverConfiguration(javaTypeResolverConfiguration);
-        }
+        }*/
         //forUpdate 插件
         if(generatorConfig.isNeedForUpdate()) {
             if (DbType.MySQL.name().equals(dbType)
@@ -235,7 +235,7 @@ public class MybatisGeneratorBridge {
                 context.addPluginConfiguration(pluginConfiguration);
             }
         }
-        if (generatorConfig.isUseDAOExtendStyle()) {
+        /*if (generatorConfig.isUseDAOExtendStyle()) {
             if (DbType.MySQL.name().equals(dbType) || DbType.MySQL_8.name().equals(dbType)
                     || DbType.PostgreSQL.name().equals(dbType)) {
                 PluginConfiguration pluginConfiguration = new PluginConfiguration();
@@ -244,7 +244,7 @@ public class MybatisGeneratorBridge {
                 pluginConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.CommonDAOInterfacePlugin");
                 context.addPluginConfiguration(pluginConfiguration);
             }
-        }
+        }*/
 
         context.setTargetRuntime("MyBatis3");
 
