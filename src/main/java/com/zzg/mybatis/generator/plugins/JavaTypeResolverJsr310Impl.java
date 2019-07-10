@@ -13,7 +13,7 @@ import java.time.LocalTime;
  * @author hanakei
  * @since 2018/4/28
  */
-public class JavaTypeResolverJsr310Impl extends JavaTypeResolverDefaultImpl {
+public class  JavaTypeResolverJsr310Impl extends JavaTypeResolverDefaultImpl {
 
     @Override
     protected FullyQualifiedJavaType overrideDefaultType(IntrospectedColumn column, FullyQualifiedJavaType defaultType) {

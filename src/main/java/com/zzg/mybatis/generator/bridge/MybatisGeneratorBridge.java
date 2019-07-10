@@ -56,6 +56,7 @@ public class MybatisGeneratorBridge {
 
     public void generate() throws Exception {
         Configuration configuration = new Configuration();
+        //实体
         Context context = new Context(ModelType.CONDITIONAL);
         configuration.addContext(context);
 		
@@ -69,12 +70,12 @@ public class MybatisGeneratorBridge {
         TableConfiguration tableConfig = new TableConfiguration(context);
         tableConfig.setTableName(generatorConfig.getTableName());
         tableConfig.setDomainObjectName(generatorConfig.getDomainObjectName());
-        if(!generatorConfig.isUseExample()) {
+        /*if(!generatorConfig.isUseExample()) {
             tableConfig.setUpdateByExampleStatementEnabled(false);
             tableConfig.setCountByExampleStatementEnabled(false);
             tableConfig.setDeleteByExampleStatementEnabled(false);
             tableConfig.setSelectByExampleStatementEnabled(false);
-        }
+        }*/
 
 		context.addProperty("autoDelimitKeywords", "true");
 		if (DbType.MySQL.name().equals(dbType) || DbType.MySQL_8.name().equals(dbType)) {
@@ -172,6 +173,7 @@ public class MybatisGeneratorBridge {
         context.setJavaClientGeneratorConfiguration(daoConfig);
         // Comment
         CommentGeneratorConfiguration commentConfig = new CommentGeneratorConfiguration();
+        //生成model注释
         commentConfig.setConfigurationType(DbRemarksCommentGenerator.class.getName());
         if (generatorConfig.isComment()) {
             commentConfig.addProperty("columnRemarks", "true");
@@ -184,10 +186,10 @@ public class MybatisGeneratorBridge {
         context.addProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING, generatorConfig.getEncoding());
 
         //实体添加序列化
-        PluginConfiguration serializablePluginConfiguration = new PluginConfiguration();
+        /*PluginConfiguration serializablePluginConfiguration = new PluginConfiguration();
         serializablePluginConfiguration.addProperty("type", "org.mybatis.generator.plugins.SerializablePlugin");
         serializablePluginConfiguration.setConfigurationType("org.mybatis.generator.plugins.SerializablePlugin");
-        context.addPluginConfiguration(serializablePluginConfiguration);
+        context.addPluginConfiguration(serializablePluginConfiguration);*/
         // toString, hashCode, equals插件
         /*if (generatorConfig.isNeedToStringHashcodeEquals()) {
             PluginConfiguration pluginConfiguration1 = new PluginConfiguration();
@@ -200,7 +202,7 @@ public class MybatisGeneratorBridge {
             context.addPluginConfiguration(pluginConfiguration2);
         }*/
         // limit/offset插件
-        if (generatorConfig.isOffsetLimit()) {
+        /*if (generatorConfig.isOffsetLimit()) {
             if (DbType.MySQL.name().equals(dbType) || DbType.MySQL_8.name().equals(dbType)
 		            || DbType.PostgreSQL.name().equals(dbType)) {
                 PluginConfiguration pluginConfiguration = new PluginConfiguration();
@@ -208,13 +210,16 @@ public class MybatisGeneratorBridge {
                 pluginConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.MySQLLimitPlugin");
                 context.addPluginConfiguration(pluginConfiguration);
             }
-        }
+        }*/
         /*//for JSR310
         if (generatorConfig.isJsr310Support()) {
             JavaTypeResolverConfiguration javaTypeResolverConfiguration = new JavaTypeResolverConfiguration();
             javaTypeResolverConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.JavaTypeResolverJsr310Impl");
             context.setJavaTypeResolverConfiguration(javaTypeResolverConfiguration);
         }*/
+        JavaTypeResolverConfiguration javaTypeResolverConfiguration = new JavaTypeResolverConfiguration();
+        javaTypeResolverConfiguration.setConfigurationType("com.zzg.mybatis.generator.plugins.MyJavaTypeResolverImpl");
+        context.setJavaTypeResolverConfiguration(javaTypeResolverConfiguration);
         //forUpdate 插件
         if(generatorConfig.isNeedForUpdate()) {
             if (DbType.MySQL.name().equals(dbType)

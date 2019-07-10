@@ -209,7 +209,7 @@ public class MainUIController extends BaseFXController {
                         this.tableName = tableName;
                         tableNameField.setText(tableName);
                         domainObjectNameField.setText(MyStringUtils.dbStringToCamelStyle(tableName));
-                        mapperName.setText(domainObjectNameField.getText().concat("DAO"));
+//                        mapperName.setText(domainObjectNameField.getText().concat("DAO"));
                     }
                 }
             });
@@ -267,7 +267,7 @@ public class MainUIController extends BaseFXController {
     public void generateCode() {
         //TODO sy
         //1. javaType
-        //2.mapper.java的生成位置
+        //2.mapper.java的生成位置  done
         //3.自动生成方法，只保留select和insert
         //4.insert中 is_deleted, create_time 使用写死的值
         //5.insertzi东生成主键id
@@ -385,7 +385,7 @@ public class MainUIController extends BaseFXController {
         generatorConfig.setModelPackageTargetFolder(modelTargetProject.getText());
         generatorConfig.setDaoPackage(daoTargetPackage.getText());
         generatorConfig.setDaoTargetFolder(daoTargetProject.getText());
-        generatorConfig.setMapperName(mapperName.getText());
+//        generatorConfig.setMapperName(mapperName.getText());
         generatorConfig.setMappingXMLPackage(mapperTargetPackage.getText());
         generatorConfig.setMappingXMLTargetFolder(mappingTargetProject.getText());
         generatorConfig.setTableName(tableNameField.getText());
