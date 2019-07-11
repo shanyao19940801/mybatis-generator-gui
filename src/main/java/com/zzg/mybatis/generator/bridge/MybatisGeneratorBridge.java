@@ -175,7 +175,7 @@ public class MybatisGeneratorBridge {
         CommentGeneratorConfiguration commentConfig = new CommentGeneratorConfiguration();
         //生成model注释
         commentConfig.setConfigurationType(DbRemarksCommentGenerator.class.getName());
-        if (generatorConfig.isComment()) {//tst
+        if (generatorConfig.isComment()) {
             commentConfig.addProperty("columnRemarks", "true");
         }
         if (generatorConfig.isAnnotation()) {
