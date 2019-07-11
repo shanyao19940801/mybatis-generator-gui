@@ -21,6 +21,7 @@ import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 import java.util.List;
 
+import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
@@ -57,6 +58,8 @@ public class ColumnOverride extends PropertyHolder {
      * that it should not be used in insert or update statements.
      */
     private boolean isGeneratedAlways;
+
+    private FullyQualifiedJavaType fullyQualifiedJavaType;
 
     /**
      * Instantiates a new column override.
@@ -233,5 +236,13 @@ public class ColumnOverride extends PropertyHolder {
 
     public void setGeneratedAlways(boolean isGeneratedAlways) {
         this.isGeneratedAlways = isGeneratedAlways;
+    }
+
+    public FullyQualifiedJavaType getFullyQualifiedJavaType() {
+        return fullyQualifiedJavaType;
+    }
+
+    public void setFullyQualifiedJavaType(FullyQualifiedJavaType fullyQualifiedJavaType) {
+        this.fullyQualifiedJavaType = fullyQualifiedJavaType;
     }
 }

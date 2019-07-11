@@ -8,6 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.config.ColumnOverride;
 import org.mybatis.generator.config.IgnoredColumn;
 
@@ -35,6 +36,8 @@ public class SelectTableColumnController extends BaseFXController {
     private TableColumn<UITableColumnVO, String> propertyNameColumn;
     @FXML
     private TableColumn<UITableColumnVO, String> typeHandlerColumn;
+    @FXML
+    private TableColumn<UITableColumnVO, String> javaTypePackageColumn;
 
     private MainUIController mainUIController;
 
@@ -48,6 +51,7 @@ public class SelectTableColumnController extends BaseFXController {
         jdbcTypeColumn.setCellValueFactory(new PropertyValueFactory<>("jdbcType"));
         propertyNameColumn.setCellValueFactory(new PropertyValueFactory<>("propertyName"));
         typeHandlerColumn.setCellValueFactory(new PropertyValueFactory<>("typeHandler"));
+        javaTypePackageColumn.setCellValueFactory(new PropertyValueFactory<>("javaTypePackage"));
         // Cell Factory that customize how the cell should render
         checkedColumn.setCellFactory(CheckBoxTableCell.forTableColumn(checkedColumn));
         javaTypeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -63,6 +67,12 @@ public class SelectTableColumnController extends BaseFXController {
         typeHandlerColumn.setOnEditCommit(event -> {
             event.getTableView().getItems().get(event.getTablePosition().getRow()).setTypeHandle(event.getNewValue());
         });
+
+        javaTypePackageColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        javaTypePackageColumn.setOnEditCommit(event -> {
+            event.getTableView().getItems().get(event.getTablePosition().getRow()).setJavaTypePackage(event.getNewValue());
+        });
+
     }
 
     @FXML
@@ -81,6 +91,7 @@ public class SelectTableColumnController extends BaseFXController {
                     columnOverride.setTypeHandler(item.getTypeHandle());
                     columnOverride.setJavaProperty(item.getPropertyName());
                     columnOverride.setJavaType(item.getJavaType());
+                    columnOverride.setFullyQualifiedJavaType(new FullyQualifiedJavaType(item.getJavaTypePackage()));
                     columnOverrides.add(columnOverride);
                 }
             });

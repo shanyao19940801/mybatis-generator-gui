@@ -273,6 +273,7 @@ public class MainUIController extends BaseFXController {
         //5.insertzi东生成主键id
         //6.mapper.xml 删除sql选项
         //7.实体注释可选择
+        //8.自动配置mybatis-config
         if (tableName == null) {
             AlertUtil.showWarnAlert("请先在左侧选择数据库表");
             return;

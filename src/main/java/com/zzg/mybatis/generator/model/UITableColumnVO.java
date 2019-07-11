@@ -22,6 +22,8 @@ public class UITableColumnVO {
 
     private StringProperty typeHandle = new SimpleStringProperty();
 
+    private StringProperty javaTypePackage = new SimpleStringProperty();
+
     public String getColumnName() {
         return columnName.get();
     }
@@ -92,5 +94,17 @@ public class UITableColumnVO {
 
     public void setJavaType(String javaType) {
         this.javaType.set(javaType);
+    }
+
+    public String getJavaTypePackage() {
+        return javaTypePackage.get();
+    }
+
+    public StringProperty javaTypePackageProperty() {
+        return javaTypePackage;
+    }
+
+    public void setJavaTypePackage(String javaTypePackage) {
+        this.javaTypePackage.set(javaTypePackage);
     }
 }
