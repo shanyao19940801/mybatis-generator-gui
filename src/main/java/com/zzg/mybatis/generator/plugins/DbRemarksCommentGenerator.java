@@ -31,7 +31,7 @@ import static org.mybatis.generator.internal.util.StringUtility.isTrue;
 /**
  * 此插件使用数据库表中列的注释来生成Java Model中属性的注释
  *
- * @author Owen Zou
+ * @author
  * 
  */
 public class DbRemarksCommentGenerator implements CommentGenerator {
@@ -110,10 +110,12 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
 
     public void addModelClassComment(TopLevelClass topLevelClass,
                                 IntrospectedTable introspectedTable) {
-        topLevelClass.addJavaDocLine("/**");
-        topLevelClass.addJavaDocLine(" * " + introspectedTable.getFullyQualifiedTable().getIntrospectedTableName());
-        topLevelClass.addJavaDocLine(" * @author ");
-        topLevelClass.addJavaDocLine(" */");
+        if (columnRemarks) {
+            topLevelClass.addJavaDocLine("/**");
+            topLevelClass.addJavaDocLine(" * " + introspectedTable.getFullyQualifiedTable().getIntrospectedTableName());
+            topLevelClass.addJavaDocLine(" * @author ");
+            topLevelClass.addJavaDocLine(" */");
+        }
         if(isAnnotations) {
             topLevelClass.addAnnotation("@Table(name=\"" + introspectedTable.getFullyQualifiedTableNameAtRuntime() + "\")");
         }
@@ -126,7 +128,7 @@ public class DbRemarksCommentGenerator implements CommentGenerator {
     public void addFieldComment(Field field,
             IntrospectedTable introspectedTable,
             IntrospectedColumn introspectedColumn) {
-        if (StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
+        if (columnRemarks && StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
             field.addJavaDocLine("/**");
             StringBuilder sb = new StringBuilder();
             sb.append(" * ");
