@@ -421,8 +421,10 @@ public class DatabaseIntrospector {
                         introspectedColumn.setColumnNameDelimited(true);
                     }
 
+                    //qingqing 自定义JavaType
                     if (columnOverride.getFullyQualifiedJavaType() != null) {
                         introspectedColumn.setFullyQualifiedJavaType(columnOverride.getFullyQualifiedJavaType());
+                        introspectedColumn.setJavaType(true);
                     }
 
                     introspectedColumn.setGeneratedAlways(columnOverride.isGeneratedAlways());

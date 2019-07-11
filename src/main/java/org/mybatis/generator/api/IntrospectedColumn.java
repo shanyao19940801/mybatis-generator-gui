@@ -81,6 +81,9 @@ public class IntrospectedColumn {
      */
     protected boolean isGeneratedAlways;
 
+    //qingqing 用于生成mapper.xml文件中 javaType
+    protected boolean isJavaType;
+
     /**
      * Constructs a Column definition. This object holds all the information
      * about a column that is required to generate Java objects and SQL maps;
@@ -339,5 +342,13 @@ public class IntrospectedColumn {
 
     public void setGeneratedAlways(boolean isGeneratedAlways) {
         this.isGeneratedAlways = isGeneratedAlways;
+    }
+
+    public boolean isJavaType() {
+        return isJavaType;
+    }
+
+    public void setJavaType(boolean javaType) {
+        isJavaType = javaType;
     }
 }
